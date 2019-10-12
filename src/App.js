@@ -6,13 +6,28 @@ import Shop from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUp from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import { auth } from "./firebase/firebase.utils";
+import { createUserProfileDocument } from "./firebase/fireStore.utils";
 
 function App() {
   const [currentUser, updateUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      updateUser(user);
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (!userAuth) {
+        updateUser(userAuth);
+        return;
+      }
+
+      const userRef = await createUserProfileDocument(userAuth);
+
+      userRef.onSnapshot(snapShot => {
+        const user = {
+          id: snapShot.id,
+          ...snapShot.data()
+        };
+
+        updateUser(user);
+      });
     });
 
     return () => {

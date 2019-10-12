@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/4.3 crown.svg.svg";
 
 import "./header.styles.scss";
-import { auth } from "firebase";
+import { auth } from "../../firebase/firebase.utils";
 
 export default function Header({ currentUser }) {
   return (
@@ -19,9 +19,13 @@ export default function Header({ currentUser }) {
           contact
         </Link>
         {currentUser ? (
-          <div className="option" onClick={() => auth.signOut()}></div>
+          <div className="option" onClick={() => auth.signOut()}>
+            sign out
+          </div>
         ) : (
-          <Link to="/signin" className="option">sign in</Link>
+          <Link to="/signin" className="option">
+            sign in
+          </Link>
         )}
       </div>
     </div>

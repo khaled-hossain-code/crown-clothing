@@ -20,9 +20,10 @@ function App() {
     };
   }, []);
 
+  console.log(currentUser);
   return (
     <div>
-      <Header currentUser={currentUser}/>
+      <Header currentUser={currentUser} />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/shop" component={Shop} />

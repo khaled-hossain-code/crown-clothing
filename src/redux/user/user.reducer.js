@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { SET_CURRENT_USER } from "./user.action.constants";
+import { SET_CURRENT_USER } from "./user.types";
 
 const selectAction = {
   [SET_CURRENT_USER]: setCurrentUser,

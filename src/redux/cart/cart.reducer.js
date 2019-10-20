@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { TOGGLE_CART_HIDDEN, ADD_ITEM, REMOVE_ITEM } from "./cart.types";
+import { TOGGLE_CART_HIDDEN, ADD_ITEM } from "./cart.types";
 import { addItemToCart } from "./cart.utils";
 
 const selectAction = {
@@ -8,7 +8,7 @@ const selectAction = {
 };
 
 const INITIAL_STATE = {
-  hidden: true,
+  hidden: false,
   cartItems: []
 };
 

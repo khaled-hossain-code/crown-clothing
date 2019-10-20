@@ -1,12 +1,15 @@
 import _ from "lodash";
-import { TOGGLE_CART_HIDDEN } from "./cart.types";
+import { TOGGLE_CART_HIDDEN, ADD_ITEM, REMOVE_ITEM } from "./cart.types";
+import { addItemToCart } from "./cart.utils";
 
 const selectAction = {
-  [TOGGLE_CART_HIDDEN]: toggleCartHidden
+  [TOGGLE_CART_HIDDEN]: toggleCartHidden,
+  [ADD_ITEM]: addItem
 };
 
 const INITIAL_STATE = {
-  hidden: true
+  hidden: true,
+  cartItems: []
 };
 
 const userReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -19,6 +22,11 @@ const userReducer = (state = INITIAL_STATE, { type, payload }) => {
 
 function toggleCartHidden(newState) {
   newState.hidden = !newState.hidden;
+  return newState;
+}
+
+function addItem(newState, payload) {
+  newState.cartItems = addItemToCart(newState.cartItems, payload);
   return newState;
 }
 

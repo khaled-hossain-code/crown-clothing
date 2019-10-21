@@ -1,10 +1,17 @@
 import _ from "lodash";
-import { TOGGLE_CART_HIDDEN, ADD_ITEM } from "./cart.types";
-import { addItemToCart } from "./cart.utils";
+import {
+  TOGGLE_CART_HIDDEN,
+  ADD_ITEM,
+  REMOVE_ITEM,
+  CLEAR_ITEM_FROM_CART
+} from "./cart.types";
+import { addItemToCart, clearItem } from "./cart.utils";
 
 const selectAction = {
   [TOGGLE_CART_HIDDEN]: toggleCartHidden,
-  [ADD_ITEM]: addItem
+  [ADD_ITEM]: addItem,
+  [REMOVE_ITEM]: removeItem,
+  [CLEAR_ITEM_FROM_CART]: clearItemFromCart
 };
 
 const INITIAL_STATE = {
@@ -25,8 +32,25 @@ function toggleCartHidden(newState) {
   return newState;
 }
 
-function addItem(newState, payload) {
-  newState.cartItems = addItemToCart(newState.cartItems, payload);
+function addItem(newState, item) {
+  newState.cartItems = addItemToCart(newState.cartItems, item);
+  return newState;
+}
+
+function clearItemFromCart(newState, itemId) {
+  newState.cartItems = clearItem(newState.cartItems, itemId);
+  return newState;
+}
+
+function removeItem(newState, itemId) {
+  const removedItem = newState.cartItems.find(item => item.id === itemId);
+
+  if (removedItem.quantity === 1) {
+    return clearItemFromCart(newState, itemId);
+  }
+
+  removedItem.quantity -= 1;
+
   return newState;
 }
 

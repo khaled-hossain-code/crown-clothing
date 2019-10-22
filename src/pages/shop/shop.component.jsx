@@ -1,21 +1,21 @@
 import React, { Component } from "react";
-import SHOP_DATA from "./shop.data";
+import { useSelector } from "react-redux";
 import CollectionPreview from "../../components/collection-preview/collection-preview.component";
+import { createStructuredSelector } from "reselect";
+import { selectCollections } from "../../redux/shop/shop.selector";
 
-export default class Shop extends Component {
-  state = {
-    collections: SHOP_DATA
-  };
+function Shop() {
+  const { collections } = useSelector(
+    createStructuredSelector({ collections: selectCollections })
+  );
 
-  render() {
-    const { collections } = this.state;
-
-    return (
-      <div>
-        {collections.map(({ id, ...otherCollectionProps }) => {
-          return <CollectionPreview key={id} {...otherCollectionProps} />;
-        })}
-      </div>
-    );
-  }
+  return (
+    <div>
+      {collections.map(({ id, ...otherCollectionProps }) => {
+        return <CollectionPreview key={id} {...otherCollectionProps} />;
+      })}
+    </div>
+  );
 }
+
+export default Shop;

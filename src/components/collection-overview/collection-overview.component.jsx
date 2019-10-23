@@ -3,11 +3,11 @@ import "./collection-overview.styles.scss";
 import { useSelector } from "react-redux";
 import CollectionPreview from "../../components/collection-preview/collection-preview.component";
 import { createStructuredSelector } from "reselect";
-import { selectCollections } from "../../redux/shop/shop.selector";
+import { selectCollectionsArr } from "../../redux/shop/shop.selector";
 
 function CollectionOverview() {
   const { collections } = useSelector(
-    createStructuredSelector({ collections: selectCollections })
+    createStructuredSelector({ collections: selectCollectionsArr })
   );
 
   return (

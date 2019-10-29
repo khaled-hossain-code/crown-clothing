@@ -12,7 +12,9 @@ import CheckoutPage from "./pages/checkout/checkout.component";
 import Header from "./components/header/header.component";
 
 import { auth } from "./firebase/firebase.utils";
-import { createUserProfileDocument } from "./firebase/fireStore.utils";
+import {
+  createUserProfileDocument,
+} from "./firebase/fireStore.utils";
 
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
@@ -71,7 +73,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
 });
 
 export default connect(

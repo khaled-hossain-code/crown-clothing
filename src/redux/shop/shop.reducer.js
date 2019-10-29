@@ -1,11 +1,11 @@
 import _ from "lodash";
-import SHOP_DATA from "./shop.data";
+import { UPDATE_COLLECTIONS } from "./shop.types";
 
 const INITIAL_STATE = {
-  collections: SHOP_DATA
+  collections: null
 };
 
-const selectAction = {};
+const selectAction = { [UPDATE_COLLECTIONS]: updateCollections };
 
 const shopReducer = (state = INITIAL_STATE, { type, payload }) => {
   if (!Object.keys(selectAction).includes(type)) return state;
@@ -14,5 +14,10 @@ const shopReducer = (state = INITIAL_STATE, { type, payload }) => {
 
   return selectAction[type](currentState, payload);
 };
+
+function updateCollections(newState, collections) {
+  newState.collections = collections;
+  return newState;
+}
 
 export default shopReducer;

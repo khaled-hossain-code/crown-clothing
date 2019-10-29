@@ -18,3 +18,7 @@ export const selectCollection = collectionName => {
     collections => (collections ? collections[collectionName] : null)
   );
 };
+
+export const selectIsCollectionsLoaded = () => {
+  
+}
